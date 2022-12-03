@@ -10,7 +10,9 @@ import org.testng.annotations.Test;
 
 public class HTTPRequests {
 	
-	//@Test(priority=1)
+	int id;
+	
+	@Test(priority=1)
 	void getUsers() {
 		
 		given()
@@ -23,22 +25,53 @@ public class HTTPRequests {
 			.body("page",equalTo(2))
 			.log().all();
 	}
-	@Test
+	@Test(priority=2)
 	void createUser() {
 		
 		HashMap data = new HashMap();
 		data.put("name", "nero");
 		data.put("job", "qa analyst");
 		
-		given()
+		id=given()
 			.contentType("application/json")
 			.body(data)
 				
 		.when()
 			.post("https://reqres.in/api/users")
+			.jsonPath().getInt("id");
 			
-		.then()
+			
+		/*.then()
 			.statusCode(201)
+			.log().all();*/
+	}
+	
+	@Test(priority=3,dependsOnMethods= {"createUser"})
+	void updateUser() {
+		HashMap data = new HashMap();
+		data.put("name", "nyero");
+		data.put("job", "SDET");
+		
+		given()
+			.contentType("application/json")
+			.body(data)
+		
+		.when()
+			.put("https://reqres.in/api/users/"+id)
+		
+		.then()
+			.statusCode(200);
+	}
+	@Test(priority=4)
+	void deleteUser() {
+		
+		given()
+		
+		.when()
+			.delete("https://reqres.in/api/users/"+id)
+		
+		.then()
+			.statusCode(204)
 			.log().all();
 	}
 

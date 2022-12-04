@@ -1,63 +1,53 @@
 package day3;
 
-import org.testng.annotations.Test;
-
-import io.restassured.response.Response;
-
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
 
 import java.util.Map;
 
+import org.testng.annotations.Test;
+
+import io.restassured.response.Response;
+
 public class CookiesDemo {
 	
 	//@Test(priority=1)
 	
-	void testCookies()
-	{
+	void testCookies() {
+		
 		given()
 		
 		.when()
 			.get("https://www.google.com/")
-			
 		
 		.then()
-			.statusCode(200)
-			.cookie("AEC", "AakniGM0chQMHrLuhqOIgHq-kZkmDii2cSE19nCDrc46CwsmHSnEh9lEaQ")
+			.cookie("AEC","AakniGOLdcambmloOVwvfrvfGA0WQK8PXei5Zv0IXp-qAiPAswf_0KXrtMo")
 			.log().all();
+		
 	}
 	
-@Test(priority=2)
-	
-	void getCookiesInfo()
-	{
-		Response res=given()
+	@Test
+	void getCookiesInfo() {
+		
+		Response response=given()
 		
 		.when()
-			.get("https://www.google.com/");
-			
-		//get single cookie info
-		//String cookie_value = res.getCookie("AEC");
+		.get("https://www.google.com/");
 		
-		//System.out.println("Value of cookie is:"+ cookie_value);
+		//String cookie_value= response.getCookie("AEC");
+		//System.out.println("value of cookie is: "+ cookie_value);
 		
-		//get all cookies info
-		
-		Map<String,String> cookies_values= res.getCookies();
+		Map<String,String>cookies_values= response.getCookies();
 		
 		
-		//System.out.println(cookies_values.keySet());
 		
 		for(String k:cookies_values.keySet()) {
-			
-			String cookie_value=res.getCookie(k);
-			System.out.println(k+"   "+cookie_value);
-		
+			String cookie_value=response.getCookie(k);
+			System.out.println(k+ "        "+ cookie_value);
 			
 		}
 		
 	}
-	
 
 }

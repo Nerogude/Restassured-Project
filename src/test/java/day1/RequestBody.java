@@ -89,6 +89,7 @@ public class RequestBody {
 	@Test
 	void test_Pojo() {
 		
+		
 		PlainOldJavaObject pojo= new PlainOldJavaObject();
 		pojo.setName("pavan");
 		pojo.setLocation("uk");

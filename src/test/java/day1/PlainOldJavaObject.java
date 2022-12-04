@@ -2,8 +2,12 @@ package day1;
 
 public class PlainOldJavaObject {
 	
-	
 	String name;
+	String location;
+	String phone;
+	String courses[];
+	
+	
 	public String getName() {
 		return name;
 	}
@@ -28,9 +32,6 @@ public class PlainOldJavaObject {
 	public void setCourses(String[] courses) {
 		this.courses = courses;
 	}
-	String location;
-	String phone;
-	String courses[];
 	
 
 }
